@@ -1,0 +1,32 @@
+@model Vidly.ViewModels.CustomerDetailsViewModel
+@{
+    ViewBag.Title = "Custumers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Customers</h1>
+@if (Model.Customers.Count == 0)
+{
+    <text>There is no Customers </text>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <th>#</th>
+        <th>Customer Name</th>
+        <th>Membership Type</th>
+        <th>Discount Rate</th>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.Customers.Count; ++i)
+        {
+            <tr>
+                <th>@i</th>
+                <td>@Html.ActionLink(Model.Customers[i].Name,"Edit", new {id = Model.Customers[i].Id},null)</td>
+                <td>@Model.Customers[i].MembershipType.Name</td>
+                <td>@Model.Customers[i].MembershipType.DiscountRate%</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
