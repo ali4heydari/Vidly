@@ -194,6 +194,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902101821294_InitialMigration.cs" />
+    <Compile Include="Migrations\201902101821294_InitialMigration.Designer.cs">
+      <DependentUpon>201902101821294_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902101824455_AddMembershipTypeToDb.cs" />
+    <Compile Include="Migrations\201902101824455_AddMembershipTypeToDb.Designer.cs">
+      <DependentUpon>201902101824455_AddMembershipTypeToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902101833232_AddGanres.cs" />
+    <Compile Include="Migrations\201902101833232_AddGanres.Designer.cs">
+      <DependentUpon>201902101833232_AddGanres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902101835374_AddFakeMovie.cs" />
+    <Compile Include="Migrations\201902101835374_AddFakeMovie.Designer.cs">
+      <DependentUpon>201902101835374_AddFakeMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902101836572_AddFakeCustomer.cs" />
+    <Compile Include="Migrations\201902101836572_AddFakeCustomer.Designer.cs">
+      <DependentUpon>201902101836572_AddFakeCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -238,6 +258,11 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\MovieForm.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -247,8 +272,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -270,8 +293,6 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -288,6 +309,23 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902101821294_InitialMigration.resx">
+      <DependentUpon>201902101821294_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902101824455_AddMembershipTypeToDb.resx">
+      <DependentUpon>201902101824455_AddMembershipTypeToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902101833232_AddGanres.resx">
+      <DependentUpon>201902101833232_AddGanres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902101835374_AddFakeMovie.resx">
+      <DependentUpon>201902101835374_AddFakeMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902101836572_AddFakeCustomer.resx">
+      <DependentUpon>201902101836572_AddFakeCustomer.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
