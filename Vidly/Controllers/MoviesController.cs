@@ -28,7 +28,7 @@ namespace Vidly.Controllers
             {
                 Movies = _context.Movies.Include(m => m.Genre).ToList()
             };
-            
+
             return View(moviesViewModel);
         }
 
@@ -46,7 +46,7 @@ namespace Vidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            Movie movie = _context.Movies.Single(m => m.Id == id);
+            Movie movie = _context.Movies.SingleOrDefault(m => m.Id == id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -80,6 +80,18 @@ namespace Vidly.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Movies");
+        }
+
+        public ActionResult New()
+        {
+            List<Genre> genres = _context.Genres.ToList();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+
+            return View("MovieForm", viewModel);
         }
     }
 }
