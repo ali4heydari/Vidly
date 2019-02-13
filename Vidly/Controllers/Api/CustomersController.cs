@@ -38,7 +38,7 @@ namespace Vidly.Controllers.Api
             return Ok(Mapper.Map<Customer, CustomerDto>(customer));
         }
 
-        // POST /api/customer
+        // POST /api/customers
         [HttpPost]
         public IHttpActionResult CreateCustomerDto(CustomerDto customerDto)
         {
@@ -54,7 +54,7 @@ namespace Vidly.Controllers.Api
         }
 
 
-        // PUT /api/customer/1
+        // PUT /api/customers/1
         [HttpPut]
         public void UpdateCustomer(int id, CustomerDto customerDto)
         {
@@ -70,7 +70,7 @@ namespace Vidly.Controllers.Api
             Mapper.Map(customerDto, customerInDb);
         }
 
-        // DELETE /api/customer
+        // DELETE /api/customers/1
         [HttpDelete]
         public void DeleteCustomer(int id)
         {
