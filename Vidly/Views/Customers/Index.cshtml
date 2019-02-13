@@ -1,3 +1,4 @@
+@using Vidly.Models
 @model Vidly.ViewModels.CustomerDetailsViewModel
 @{
     ViewBag.Title = "Custumers";
@@ -5,7 +6,7 @@
 }
 <h1>Customers</h1>
 <p>
-    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("New Customer", "New", "Customers", null, new {@class = "btn btn-primary"})
 </p>
 @if (Model.Customers.Count == 0)
 {
@@ -13,23 +14,51 @@
 }
 else
 {
-    <table class="table">
+    <table id="customers" class="table">
         <thead>
-        <th>#</th>
-        <th>Customer Name</th>
-        <th>Membership Type</th>
-        <th>Discount Rate</th>
+        <tr>
+            <th>#</th>
+            <th>Customer Name</th>
+            <th>Membership Type</th>
+            <th>Discount Rate</th>
+            <th>Delete</th>
+        </tr>
         </thead>
         <tbody>
         @for (int i = 0; i < Model.Customers.Count; ++i)
         {
             <tr>
                 <th>@i</th>
-                <td>@Html.ActionLink(Model.Customers[i].Name,"Edit", new {id = Model.Customers[i].Id},null)</td>
+                <td>@Html.ActionLink(Model.Customers[i].Name, "Edit", new {id = Model.Customers[i].Id}, null)</td>
                 <td>@Model.Customers[i].MembershipType.Name</td>
                 <td>@Model.Customers[i].MembershipType.DiscountRate%</td>
+                <td>
+                    <button data-customer-id="@Model.Customers[i].Id" class="btn-link js-delete">Delete</button>
+                </td>
             </tr>
         }
         </tbody>
     </table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#customers .js-delete").on("click",
+                function() {
+                    var button = $(this);
+                    if (confirm("Are you sure to delete this customer")) {
+                        $.ajax({
+                            url: "/api/customers/" + button.attr("data-customer-id"),
+                            method: "DELETE",
+                            success: function() {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+
+                });
+        })
+    </script>
 }
