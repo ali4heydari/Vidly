@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201902101836572_AddFakeCustomer.Designer.cs">
       <DependentUpon>201902101836572_AddFakeCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902120948584_ChangeMoviePropertyRequered.cs" />
+    <Compile Include="Migrations\201902120948584_ChangeMoviePropertyRequered.Designer.cs">
+      <DependentUpon>201902120948584_ChangeMoviePropertyRequered.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -326,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902101836572_AddFakeCustomer.resx">
       <DependentUpon>201902101836572_AddFakeCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902120948584_ChangeMoviePropertyRequered.resx">
+      <DependentUpon>201902120948584_ChangeMoviePropertyRequered.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
