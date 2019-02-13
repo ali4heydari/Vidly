@@ -47,11 +47,7 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            CustomerDetailsViewModel customerDetailsViewModel = new CustomerDetailsViewModel()
-            {
-                Customers = GetCustomers()
-            };
-            return View(customerDetailsViewModel);
+            return View();
         }
 
         private List<Customer> GetCustomers()
