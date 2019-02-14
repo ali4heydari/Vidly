@@ -30,7 +30,7 @@ namespace Vidly.Controllers
                 Movies = _context.Movies.Include(m => m.Genre).ToList()
             };
 
-            return View(moviesViewModel);
+            return View(User.IsInRole(RoleName.CAN_MANAGE_MOVIES) ? "List" : "ReadOnlyList");
         }
 
 
@@ -45,6 +45,7 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = RoleName.CAN_MANAGE_MOVIES)]
         public ActionResult Edit(int id)
         {
             Movie movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -63,6 +64,7 @@ namespace Vidly.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CAN_MANAGE_MOVIES)]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
@@ -95,7 +97,6 @@ namespace Vidly.Controllers
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-
             }
             catch (Exception e)
             {
@@ -105,6 +106,8 @@ namespace Vidly.Controllers
             return RedirectToAction("Index", "Movies");
         }
 
+
+        [Authorize(Roles = RoleName.CAN_MANAGE_MOVIES)]
         public ActionResult New()
         {
             List<Genre> genres = _context.Genres.ToList();
