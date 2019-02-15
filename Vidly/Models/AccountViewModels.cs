@@ -11,6 +11,10 @@ namespace Vidly.Models
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
 
+        [Required]
+        [Display(Name = "Phone")]
+        [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$")]
+        public string Phone { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -80,6 +84,11 @@ namespace Vidly.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Phone")]
+        [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$")]
+        public string Phone { get; set; }
     }
 
     public class ResetPasswordViewModel
