@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
+using System.Runtime.Caching
 
 namespace Vidly.Controllers
 {
@@ -47,6 +48,7 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
+            if()
             return View();
         }
 
