@@ -48,7 +48,13 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            if()
+            if (MemoryCache.Default["Genras"] == null)
+            {
+                MemoryCache.Default["Genras"] = _context.Genres.ToList();
+            }
+
+            IEnumerable<Genre> genres = MemoryCache.Default["Genras"] as IEnumerable<Genre>;
+            
             return View();
         }
 
