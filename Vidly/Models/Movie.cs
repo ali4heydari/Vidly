@@ -28,5 +28,8 @@ namespace Vidly.Models
         [Required]
         [Display(Name = "Date Added")]
         public DateTime DateAdded { get; set; }
+
+        [Display(Name = "Number Available")]
+        public byte NumberAvailable { get; set; }
     }
 }

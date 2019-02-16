@@ -270,6 +270,10 @@
     <Compile Include="Migrations\201902161603477_AddRentl.Designer.cs">
       <DependentUpon>201902161603477_AddRentl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902161931389_AddNumberAvailableToMovie.cs" />
+    <Compile Include="Migrations\201902161931389_AddNumberAvailableToMovie.Designer.cs">
+      <DependentUpon>201902161931389_AddNumberAvailableToMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -583,6 +587,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902161603477_AddRentl.resx">
       <DependentUpon>201902161603477_AddRentl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902161931389_AddNumberAvailableToMovie.resx">
+      <DependentUpon>201902161931389_AddNumberAvailableToMovie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
