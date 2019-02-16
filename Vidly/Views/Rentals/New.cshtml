@@ -9,12 +9,23 @@
 <form >
     <div class="form-group">
         <label>Customer</label>
-        <input id="customer" type="text" value="" class="form-control"/>
+        <div class="tt-container">
+            <input id="customer" type="text" value="" class="form-control"/>
+        </div>
     </div>
     <div class="form-group">
         <label>Movie</label>
-        <input id="movie" type="text" value="" class="form-control"/>
+        <div class="tt-container">
+            <input id="movie" type="text" value="" class="form-control"/>
+        </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <ul id="moviesRented" class="list-group">
+            </ul>
+        </div>
+    </div>
+
     <button class="btn btn-primary">Submit</button>
 </form>
 
@@ -22,7 +33,9 @@
 {
     <script>
         $(document).ready(function() {
-            var customerViewModel = {};
+            var customerViewModel = {
+                movieIds: []
+            };
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -41,8 +54,7 @@
                     display: 'name',
                     source: customers
                 });
-            
-            var movieViewModel = {};
+
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -61,11 +73,14 @@
                     display: 'name',
                     source: movies
                 });
-            
+
 
         }).on('typeahead:select',
-            function(e, customer) {
-                window.customerViewModel.customerId = customer.id;
+            function(e, movie) {
+                $('#moviesRented').append("<li class='list-group-item'>" + movie.name + "</li>");
+                $('#moviesRented').typeahead('val', '');
+
+                window.customerViewModel.movieIds.push(movie.id);
             });
 
 

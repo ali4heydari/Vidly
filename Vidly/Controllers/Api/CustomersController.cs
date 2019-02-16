@@ -7,7 +7,8 @@ using System.Web.Http;
 using AutoMapper;
 using Vidly.Dtos;
 using Vidly.Models;
-using  System.Data.Entity;
+using System.Data.Entity;
+using System.Web.Http.Results;
 
 namespace Vidly.Controllers.Api
 {
@@ -22,12 +23,18 @@ namespace Vidly.Controllers.Api
 
         // GET /api/customers
         [HttpGet]
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            return Ok(_context.Customers
-                .Include(c => c.MembershipType)
-                .ToList()
-                .Select(Mapper.Map<Customer, CustomerDto>));
+            IQueryable<Customer> customersQuery = _context.Customers.Include(c => c.MembershipType);
+
+            if (!String.IsNullOrEmpty(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            IEnumerable<CustomerDto> customers = customersQuery.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+
+            return Ok(customers);
         }
 
         // GET /api/customers/1
@@ -54,7 +61,7 @@ namespace Vidly.Controllers.Api
             _context.SaveChanges();
             customerDto.Id = customer.Id;
 
-            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto );
+            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
         }
 
 
