@@ -9,11 +9,65 @@
 <form >
     <div class="form-group">
         <label>Customer</label>
-        <input type="text" value="" class="form-control"/>
-    </div>           
+        <input id="customer" type="text" value="" class="form-control"/>
+    </div>
     <div class="form-group">
         <label>Movie</label>
-        <input type="text" value="" class="form-control"/>
+        <input id="movie" type="text" value="" class="form-control"/>
     </div>
     <button class="btn btn-primary">Submit</button>
 </form>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var customerViewModel = {};
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#customer').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'customers',
+                    display: 'name',
+                    source: customers
+                });
+            
+            var movieViewModel = {};
+            var movies = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/movies?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#movie').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'movies',
+                    display: 'name',
+                    source: movies
+                });
+            
+
+        }).on('typeahead:select',
+            function(e, customer) {
+                window.customerViewModel.customerId = customer.id;
+            });
+
+
+    </script>
+}
