@@ -36,7 +36,7 @@
             movieIds: []
         };
         $(document).ready(function() {
-            
+
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -54,7 +54,10 @@
                     name: 'customers',
                     display: 'name',
                     source: customers
-                });
+                }).on("typeahead:select",
+                function(e, customer) {
+                    customerViewModel.customerId = customer.id;
+                });;
 
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -73,32 +76,31 @@
                     name: 'movies',
                     display: 'name',
                     source: movies
+                }).on('typeahead:select',
+                function(e, movie) {
+                    $('#moviesRented').append("<li class='list-group-item'>" + movie.name + "</li>");
+                    $('#moviesRented').typeahead('val', '');
+
+                    customerViewModel.movieIds.push(movie.id);
                 });
 
+            $("#newRentalForm").submit(function(e) {
+                e.preventDefault();
 
-        }).on('typeahead:select',
-            function(e, movie) {
-                $('#moviesRented').append("<li class='list-group-item'>" + movie.name + "</li>");
-                $('#moviesRented').typeahead('val', '');
-
-                customerViewModel.movieIds.push(movie.id);
+                $.ajax({
+                        url: "/api/newRentals",
+                        method: "post",
+                        data: customerViewModel
+                    })
+                    .done(function() {
+                        toastr.success("Rental successfully recorded");
+                    })
+                    .fail(function() {
+                        toastr.error("Something unexpected happen");
+                    });
             });
+        });
 
-        $("#newRentalForm").submit(function(e) {
-            e.preventDefault();
 
-            $.ajax({
-                    url: "/api/newRentals",
-                    method: "post",
-                    data: window.customerViewModel
-                })
-                .done(function() {
-                    toastr.success("Rental successfully recorded");
-                })
-                .fail(function() {
-                    toastr.error("Something unexpected happen");
-
-                });
-        })
     </script>
 }

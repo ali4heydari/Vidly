@@ -7,8 +7,7 @@ namespace Vidly.Controllers
         // GET
         public ActionResult New()
         {
-            return
-            View();
+            return View();
         }
     }
 }

@@ -17,14 +17,14 @@ namespace Vidly.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult CreateNewRentals(NewRentalDto newRentalDto)
+        public IHttpActionResult CreateNewRentals(NewRentalDto newRental)
         {
-            if (newRentalDto.MoviesId.Any())
+            if (newRental.MovieIds.Any())
             {
                 return BadRequest("No movie Ids have been given");
             }
 
-            Customer customer = _context.Customers.SingleOrDefault(c => c.Id == newRentalDto.CustomerId);
+            Customer customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
 
             if (customer == null)
             {
@@ -34,11 +34,11 @@ namespace Vidly.Controllers.Api
 
             List<Movie> movies = _context
                 .Movies
-                .Where(m => newRentalDto
-                    .MoviesId
+                .Where(m => newRental
+                    .MovieIds
                     .Contains(m.Id)).ToList();
 
-            if (movies.Count != newRentalDto.MoviesId.Count)
+            if (movies.Count != newRental.MovieIds.Count)
             {
                 return BadRequest("One or more movieIds are invalid");
             }
