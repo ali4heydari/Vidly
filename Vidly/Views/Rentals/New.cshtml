@@ -6,7 +6,7 @@
 
 <h2>New Rental form</h2>
 
-<form >
+<form id="newRentalForm">
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container">
@@ -83,6 +83,20 @@
                 window.customerViewModel.movieIds.push(movie.id);
             });
 
+        $("#newRentalForm").submit(function(e) {
+            e.preventDefault();
 
+            $.ajax({
+                    url: "/api/newRentals",
+                    method: "post",
+                    data: window.customerViewModel
+                })
+                .done(function() {
+                    console.log("done");
+                })
+                .fail(function() {
+
+                });
+        })
     </script>
 }
