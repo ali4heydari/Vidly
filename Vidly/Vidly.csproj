@@ -128,15 +128,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Toast, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Toaster.2.1.10716.0\lib\net45\Toast.exe</HintPath>
-    </Reference>
-    <Reference Include="Toaster, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Toaster.2.1.10716.0\lib\net45\Toaster.dll</HintPath>
-    </Reference>
-    <Reference Include="ToolBelt, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Toaster.2.1.10716.0\lib\net45\ToolBelt.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>

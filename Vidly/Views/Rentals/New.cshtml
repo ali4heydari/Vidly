@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-lg-4 col-xs-4">
             <ul id="moviesRented" class="list-group">
             </ul>
         </div>
@@ -32,10 +32,11 @@
 @section scripts
 {
     <script>
+        var customerViewModel = {
+            movieIds: []
+        };
         $(document).ready(function() {
-            var customerViewModel = {
-                movieIds: []
-            };
+            
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -80,7 +81,7 @@
                 $('#moviesRented').append("<li class='list-group-item'>" + movie.name + "</li>");
                 $('#moviesRented').typeahead('val', '');
 
-                window.customerViewModel.movieIds.push(movie.id);
+                customerViewModel.movieIds.push(movie.id);
             });
 
         $("#newRentalForm").submit(function(e) {
@@ -92,9 +93,10 @@
                     data: window.customerViewModel
                 })
                 .done(function() {
-                    console.log("done");
+                    toastr.success("Rental successfully recorded");
                 })
                 .fail(function() {
+                    toastr.error("Something unexpected happen");
 
                 });
         })
