@@ -10,7 +10,7 @@
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container">
-            <input id="customer" type="text" value="" class="form-control"/>
+            <input data-rule-validCustomer id="customer" required type="text" value="" class="form-control"/>
         </div>
     </div>
     <div class="form-group">
@@ -31,6 +31,7 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         var customerViewModel = {
             movieIds: []
@@ -84,21 +85,29 @@
                     customerViewModel.movieIds.push(movie.id);
                 });
 
-            $("#newRentalForm").submit(function(e) {
-                e.preventDefault();
+            $.validator.addMethod("validCustomer",
+                function() {
+                    return customerViewModel.customerId && customerViewModel.customerId !== 0;
+                    
+                }, "Please select a valid customer");
+            $("#newRentalForm").validate({
+                submitHandler: function() {
+                    e.preventDefault();
 
-                $.ajax({
-                        url: "/api/newRentals",
-                        method: "post",
-                        data: customerViewModel
-                    })
-                    .done(function() {
-                        toastr.success("Rental successfully recorded");
-                    })
-                    .fail(function() {
-                        toastr.error("Something unexpected happen");
-                    });
+                    $.ajax({
+                            url: "/api/newRentals",
+                            method: "post",
+                            data: customerViewModel
+                        })
+                        .done(function() {
+                            toastr.success("Rental successfully recorded");
+                        })
+                        .fail(function() {
+                            toastr.error("Something unexpected happen");
+                        });
+                }
             });
+            
         });
 
 
